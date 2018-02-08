@@ -12,8 +12,8 @@ var documentDbOptions = {
     collection: 'botdata'
 };
 
-var docDbClient = new azure.DocumentDbClient(documentDbOptions);
-var cosmosStorage = new azure.AzureBotStorage({ gzipData: false }, docDbClient);
+var docDbClient = new botbuilder_azure.DocumentDbClient(documentDbOptions);
+var cosmosStorage = new botbuilder_azure.AzureBotStorage({ gzipData: false }, docDbClient);
 
 
 // Setup Restify Server
