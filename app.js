@@ -2,7 +2,6 @@ var restify = require('restify');
 var builder = require('botbuilder');
 var azure = require('azure-storage');
 var botbuilder_azure = require("botbuilder-azure");
-require('dotenv').config();
 var dbURI = process.env.documentDBURI
 var dbKey = process.env.documentDBMasterKey
 
@@ -41,7 +40,7 @@ var tableStorage = new botbuilder_azure.AzureBotStorage({ gzipData: false }, azu
 
 // Create your bot with a function to receive messages from the user
 var bot = new builder.UniversalBot(connector);
-bot.set('storage', tableStorage);
+bot.set('storage', cosmosStorage);
 
 // Intercept trigger event (ActivityTypes.Trigger)
 bot.on('trigger', function (message) {
