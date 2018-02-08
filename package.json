@@ -1,0 +1,30 @@
+{
+  "name": "acdcbots",
+  "version": "1.0.0",
+  "description": "ACDC2018 MS Bot framework bots",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Puzzlepart/ACDC2018-bots.git"
+  },
+  "keywords": [
+    "bots",
+    "ACDC2018",
+    "Cloudborne"
+  ],
+  "author": "@damsleth",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/Puzzlepart/ACDC2018-bots/issues"
+  },
+  "homepage": "https://github.com/Puzzlepart/ACDC2018-bots#readme",
+  "dependencies": {
+    "botbuilder": "^3.14.0",
+    "botbuilder-azure": "^3.0.4",
+    "dotenv": "^5.0.0",
+    "restify": "^6.3.4"
+  }
+}
