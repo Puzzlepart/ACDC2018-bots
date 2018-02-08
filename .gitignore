@@ -13,3 +13,5 @@ env.json
 .env
 Sites.txt
 Install/~$S_*
+*.js.map
+package-lock.json
