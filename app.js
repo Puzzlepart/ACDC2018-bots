@@ -35,13 +35,13 @@ server.post('/api/messages', connector.listen());
 
 // We're running CosmosDB DocumentDbClient here, so no azure tables. 
 // Leaving for posterity
-// var tableName = 'botdata';
-// var azureTableClient = new botbuilder_azure.AzureTableClient(tableName, process.env['AzureWebJobsStorage']);
-// var tableStorage = new botbuilder_azure.AzureBotStorage({ gzipData: false }, azureTableClient);
+var tableName = 'botdata';
+var azureTableClient = new botbuilder_azure.AzureTableClient(tableName, process.env['AzureWebJobsStorage']);
+var tableStorage = new botbuilder_azure.AzureBotStorage({ gzipData: false }, azureTableClient);
 
 // Create your bot with a function to receive messages from the user
 var bot = new builder.UniversalBot(connector);
-bot.set('storage', cosmosStorage);
+bot.set('storage', tableStorage);
 
 // Intercept trigger event (ActivityTypes.Trigger)
 bot.on('trigger', function (message) {
