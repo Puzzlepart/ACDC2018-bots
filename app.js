@@ -41,20 +41,17 @@ var tableStorage = new botbuilder_azure.AzureBotStorage({ gzipData: false }, azu
 // we don't need to store all conversations in cosmosdb - OR DO WE??
 var inMemoryStorage = new builder.MemoryBotStorage();
 
-// Create your bot with a function to receive messages from the user
+// BOT INITIALIZATION
 var bot = new builder.UniversalBot(connector);
 bot.set('storage', inMemoryStorage);
 
 //LUIS SETUP
-// Make sure you add code to validate these fields
 var luisAppId = process.env.LuisAppId;
 var luisAPIKey = process.env.LuisAPIKey;
 var luisAPIHostName = process.env.LuisAPIHostName || 'westus.api.cognitive.microsoft.com';
-
 const LuisModelUrl = 'https://' + luisAPIHostName + '/luis/v1/application?id=' + luisAppId + '&subscription-key=' + luisAPIKey;
 
 // CALLBACK FROM TRIGGERS
-// Intercept trigger event (ActivityTypes.Trigger)
 bot.on('trigger', function (message) {
     // handle message from trigger function
     var queuedMessage = message.value;
@@ -91,7 +88,6 @@ bot.dialog('startWar', [
         session.send("Excellent, my Lord.");
         session.send(`We will be declaring war upon house ${session.dialogData.houseToWageWarWith}, using ${session.dialogData.soldiersInWar} soldiers and ${session.dialogData.dragonsInWar} dragons.`)
         session.send("I will send a raven immediately, to provision a war room for the forthcoming battle");
-
         var flowUrl = "https://prod-53.westeurope.logic.azure.com:443/workflows/fab679e858a6476d91fc4fc048c98d61/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=jU2sWL379pWniGLgckcqsNLxVSfXi236zfltjJVyNbk"
         var postBody = {
             "Name": `The war against House ${session.dialogData.houseToWageWarWith}`,
@@ -105,12 +101,11 @@ bot.dialog('startWar', [
             body: JSON.stringify(postBody),
             headers: { "content-type": "application/json" },
         }).then(res => { session.send("Raven away, my Liege!") })
-
         session.endDialogWithResult(results);
     }
 ])
 
-// LUIS DIALOG
+// LUIS RECOGNIZER
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 
 var intents = new builder.IntentDialog({ recognizers: [recognizer] })
