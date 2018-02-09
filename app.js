@@ -96,11 +96,14 @@ bot.dialog('startWar', [
             "Public": "True",
             "HouseName": "Cloudborne"
         };
+        var SiteTitle = `The war against House ${session.dialogData.houseToWageWarWith}`;
+        var SiteUrl = SiteTitle.replace(/\s/g, "").toLowerCase();
+        var fullSiteUrl = `https://acdc1806.sharepoint.com/sites/${SiteUrl}`
         fetch(flowUrl, {
             method: "POST",
             body: JSON.stringify(postBody),
             headers: { "content-type": "application/json" },
-        }).then(res => { session.send("Raven away, my Liege!") })
+        }).then(res => { session.send(`Raven away, my Liege! - your war room awaits you at ${fullSiteUrl}`) })
         session.endDialogWithResult(results);
     }
 ])
